@@ -3,9 +3,11 @@ import React from 'react';
 import './App.css';
 
 import Header from './Components/Header';
+import TransformersSection from './Containers/TransformersSection'
 
 export default class App extends React.Component {
   state = {
+    displayToggle: false,
     proptimusLogo: 'https://i.pinimg.com/originals/f8/7d/ec/f87dec9d6334af383a27f73e48ccf154.png',
     proptimii: [
       {
@@ -24,11 +26,24 @@ export default class App extends React.Component {
       }
     ]
   }
+  toggleState = () => {
+    console.log("clicking")
+    this.setState({
+      displayToggle: true
+    })
+  }
 
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header
+          proptimusLogo={this.state.proptimusLogo}
+          toggleState={this.toggleState}
+        />
+        {this.state.displayToggle
+          ? <TransformersSection proptimii={this.state.proptimii} />
+          : null
+          }
       </div>
     );
   }
